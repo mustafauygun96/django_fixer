@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block changetemplate %}
+    <div id="page-default">
+        <div class="main-slider owl-carousel owl-load">
+            <div class="item">
+                <img src="{% static 'img/slider-test.jpg' %}" alt="Mustafa Uygun Slider">
+            </div>
+            <div class="item">
+                <img src="{% static 'img/slider-test.jpg' %}" alt="Mustafa Uygun Slider">
+            </div>
+            <div class="item">
+                <img src="{% static 'img/slider-test.jpg' %}" alt="Mustafa Uygun Slider">
+            </div>
+        </div>
+        {% if user.is_authenticated %}
+            <div class="doviz-cevir">
+                <form method="post" class="doviz-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="AnaPara">Ana Parayı Seçiniz:</label>
+                        <select name="firstCurrency" class="form-control">
+                            {% for key,value in para_birimleri.items %}
+                                <option value='{{key}}'>{{key}}</option>
+                            {% endfor %}       
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="CeviriPara">Çevireceğiniz Parayı Seçiniz:</label>
+                        <select name="secondCurrency" class="form-control">
+                            {% for key,value in para_birimleri.items %}
+                                <option value='{{key}}'>{{key}}</option>
+                            {% endfor %}       
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Miktar">Miktarı Giriniz: </label>
+                        <input type="text" name="amount" class="form-control">
+                    </div>
+                    <label for="MiktarOrnek">Miktarı Ondalıklı Girerken Lütfen arada ' . ' koyarak giriniz. <span style="display:block;">(Örn: 108.6)</span></label>
+                    <button type="submit" class="btn btn-success">Döviz Çevir</button>
+                </form>
+                {% if info %}
+                    <div id="results" class = "pt-4">
+                        <h5>Sonuçlar</h5>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-text">{{info.amount}} {{info.firstCurrency}}</span>
+                                <div class="form-control" id="total">
+                                    {{info.result}} {{info.secondCurrency}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="container" style="padding:50px 0;">
+                <div class="alert alert-warning" role="alert">
+                    Çeviri Hizmetimizden Yararlanmanız İçin Lütfen Giriş Yapınız.
+                </div>
+            </div>
+            
+        {% endif %}
+
+    </div>
+{% endblock changetemplate %}

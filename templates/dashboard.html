@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block changetemplate %}
+    <div id="page-dashboard">
+        <div class="ust-yazi">
+            Kontrol Paneli
+        </div>
+        <div class="container">
+                <table class="table">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">Ana Para</th>
+                            <th scope="col">Çevirilen Para</th>
+                            <th scope="col">Çevirilen Miktar</th>
+                            <th scope="col">Sonuç</th>
+                            <th scope="col">Çeviren Kişi</th>
+                            <th scope="col">Çevirildiği Tarih</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for bilgiler in doviz_bilgi  %}
+                            <tr>
+                              <td>{{bilgiler.ana_para}}</td>
+                              <td>{{bilgiler.cevirilen_para}}</td>
+                              <td>{{bilgiler.cevirilen_miktar}}</td>
+                              <td>{{bilgiler.sonuc}}</td>
+                              <td>{{bilgiler.ceviren}}</td>
+                              <td>{{bilgiler.created_date}}</td>
+                            </tr>
+                          {% endfor %}
+                          
+                        </tbody>
+                      </table>
+        </div>
+    </div>
+{% endblock changetemplate %}

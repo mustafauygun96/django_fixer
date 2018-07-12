@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% load bootstrap4 %}
+{% block changetemplate %}
+    <div class="ust-yazi">
+        Hakkımızda
+    </div>
+    <div id="page-about">
+        <div class="container">
+            <div class="panel panel-primary" id="aho-panel"> 
+                <div class="panel-heading"> 
+                    <h3 class="panel-title">Biz Kimiz ?</h3> 
+                </div> 
+                <div class="panel-body"> 
+                    Python dilinin gücü ile yola koyulmuş yazılımcıyım. Bu siteyi "kolunu dahi kıpırdatmadan" deyimini kendine felsefe edinmiş Django Framework ile yapmış bulunmaktayım. <br>
+                    Sitemizde istediğiniz para biriminden, istediğiniz para birimine döviz çevirisi yapabilirsiniz. İstek ve sorularınız için : <br>
+                    <a href="tel:534 077 57 23">534 077 57 23</a> numaralı telefonuma ulaşabilirsiniz yada aşağıdaki formdan mail atabilirsiniz.
+                </div> 
+                <div class="mail-formu">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <div class="g-recaptcha" data-sitekey="6LcY2GMUAAAAACN35WpdH0G0jJWCl9zVhVocijnE"></div>
+                        <button type="submit" class="btn btn-success">Mesaj Gönder</button>
+                    </form>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+
+{% endblock changetemplate %}

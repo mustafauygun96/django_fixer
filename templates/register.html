@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% load bootstrap4 %}
+{% block changetemplate %}
+
+    {% if user.is_authenticated %}
+        <div class="container" style="padding:50px 0; text-align:center;">Başka Bir Hesap ile Kaydolmak için lütfen yukarıdaki çıkış yap butonuna basınız.</div>
+    {% else %}
+        <div class="ust-yazi">
+            Kayıt Ol
+        </div>
+        <div id="page-login">
+            <div class="container">
+                <form method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <button class="btn btn-success" type="submit">Kayıt Ol</button>
+                </form> 
+            </div>  
+        </div>
+    {% endif %}
+
+{% endblock changetemplate %}

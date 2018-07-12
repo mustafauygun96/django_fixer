@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% load bootstrap4 %}
+{% block changetemplate %}
+    {% if user.is_authenticated %}
+        <div class="container" style="padding:50px 0; text-align:center;">
+            <p>Zaten Giriş Yapmışsınız. Başka bir hesapla giriş yapmak için lütfen menüdeki çıkış yap butonuna tıklayınız.</p>
+        </div>
+
+    {% else %}
+        <div class="ust-yazi">
+            Giriş Yap
+        </div>
+        <div id="page-login">
+            <div class="container">
+                <form method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <button class="btn btn-danger" type="submit">Giriş Yap</button>
+                    <a href="/password_reset" class="parola-sifirla">Şifremi Unuttum</a>
+                </form> 
+            </div>  
+        </div>
+    {% endif %}
+    
+{% endblock changetemplate %}
